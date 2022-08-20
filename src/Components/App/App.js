@@ -3,8 +3,8 @@ import React from 'react';
 import SearchBar from '../SearchBar/SearchBar.js';
 import SearchResults from '../SearchResults/SearchResults.js';
 import Playlist from '../Playlist/Playlist.js';
-
 import Spotify from '../../util/Spotify.js';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -21,6 +21,8 @@ class App extends React.Component {
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
   }
+
+
 
   addTrack(track) {
     let tracks = this.state.playlistTracks;
@@ -59,7 +61,9 @@ class App extends React.Component {
   }
 
   render() {
+    
     return (
+      
       <div>
         <h1>Ja<span className="highlight">mmm</span>ing</h1>
         <div className="App">

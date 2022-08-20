@@ -1,5 +1,5 @@
-const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
-const redirectUri = 'http://localhost:3000/';
+const clientId = "e7f9a7640b36435c907119c81fe6c07c";
+const redirectUri = 'https://jamming-with-matt.surge.sh/';
 let accessToken;
 
 const Spotify = {
