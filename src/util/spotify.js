@@ -1,9 +1,10 @@
 const clientId = "e7f9a7640b36435c907119c81fe6c07c";
-const redirectUri = 'https://jamming-with-matt.surge.sh/';
+const redirectUri = 'http://localhost:3000/';
 let accessToken;
 
+
 const Spotify = {
-    getAccessToken() {
+    getAccessToken(term) {
         if (accessToken) {
             return accessToken;
         }
@@ -15,16 +16,18 @@ const Spotify = {
             accessToken = accessTokenMatch[1];
             const expiresIn = Number(expiresInMatch[1]);
             window.setTimeout(() => accessToken = '', expiresIn * 1000);
-            window.history.pushState('Access Token', null, '/');
+            window.history.pushState('Access Token', null, `/?state=${term}`);
             return accessToken;
         } else {
-            const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
+            const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}&state=${term}`;
             window.location = accessUrl;
+
         }
     },
 
     search(term) {
-        const accessToken = Spotify.getAccessToken();
+
+        const accessToken = Spotify.getAccessToken(term);
         return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`

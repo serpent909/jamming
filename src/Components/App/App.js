@@ -8,7 +8,7 @@ import Spotify from '../../util/Spotify.js';
 
 class App extends React.Component {
   constructor(props) {
-    super();
+    super(props);
 
     this.state = {
       searchResults: [],
@@ -20,11 +20,16 @@ class App extends React.Component {
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
+    // this.accessToken = Spotify.getAccessToken();
+    this.searchState = window.location.href.match(/state=([^&]*)/);
+    if (this.searchState && this.searchState.length && this.searchState.length > 1) {
+      this.search(this.searchState[1]);
+
+    }
   }
 
-
-
   addTrack(track) {
+
     let tracks = this.state.playlistTracks;
     if (tracks.find(savedTrack => savedTrack.id === track.id)) {
       return;
@@ -47,23 +52,31 @@ class App extends React.Component {
   savePlaylist() {
     const trackUris = this.state.playlistTracks.map(track => track.uri);
     Spotify.savePlaylist(this.state.playlistName, trackUris).then(() => {
-      this.setState({ 
-        playlistName: 'New Playlist', 
+      this.setState({
+        playlistName: 'New Playlist',
         playlistTracks: []
-       })
+      })
     })
   }
 
   search(term) {
+
+
     Spotify.search(term).then(searchResults => {
       this.setState({ searchResults: searchResults });
     })
+    if (this.searchState) {
+      window.history.pushState('Access Token', null, `/?state=${term}`)
+
+    }
+
+
   }
 
   render() {
-    
+
     return (
-      
+
       <div>
         <h1>Ja<span className="highlight">mmm</span>ing</h1>
         <div className="App">
