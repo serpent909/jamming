@@ -8,11 +8,14 @@ class Track extends React.Component {
         this.addTrack = this.addTrack.bind(this);
         this.removeTrack = this.removeTrack.bind(this);
 
+
+
     }
 
     renderAction() {
         if (this.props.isRemoval === true) {
             return <button className="Track-action" onClick={this.removeTrack}>-</button>
+
         } else {
             return <button className="Track-action" onClick={this.addTrack}>+</button>
         }
@@ -26,16 +29,20 @@ class Track extends React.Component {
         this.props.onRemove(this.props.track);
     }
 
+
     render() {
         return (
             <div className="Track">
-                <img src={this.props.track.albumImage} alt={this.props.track.name}/>
+                <img src={this.props.track.albumImage} alt={this.props.track.name} />
                 <div className="Track-information">
-                    
                     <h3>{this.props.track.name}</h3>
                     <p>{this.props.track.artist} | {this.props.track.album}</p>
-                    <p>{this.props.track.uri}</p>
-                    
+                    <p></p>
+                    <button onClick={this.props.onPlay} name={this.props.track.previewUrl}>Preview</button>
+                    <audio id={this.props.track.previewUrl}>
+                        <source src={this.props.track.previewUrl} type="audio/mpeg" />
+                        Your browser does not support the audio element.
+                    </audio>
                 </div>
                 {this.renderAction()}
             </div>

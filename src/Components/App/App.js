@@ -10,6 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+
     this.state = {
       searchResults: [],
       playlistName: 'My playlist',
@@ -20,6 +21,7 @@ class App extends React.Component {
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
+    this.play = this.play.bind(this);
     // this.accessToken = Spotify.getAccessToken();
     this.searchState = window.location.href.match(/state=([^&]*)/);
     if (this.searchState && this.searchState.length && this.searchState.length > 1) {
@@ -61,7 +63,6 @@ class App extends React.Component {
 
   search(term) {
 
-
     Spotify.search(term).then(searchResults => {
       this.setState({ searchResults: searchResults });
     })
@@ -69,7 +70,13 @@ class App extends React.Component {
       window.history.pushState('Access Token', null, `/?state=${term}`)
 
     }
+  }
 
+  play(ok) {
+    let targetElement = ok.target.name
+    let x = document.getElementById(targetElement);
+    console.log(x)
+    x.play()
 
   }
 
@@ -82,13 +89,14 @@ class App extends React.Component {
         <div className="App">
           <SearchBar onSearch={this.search} />
           <div className="App-playlist">
-            <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} />
+            <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack}  onPlay={this.play} />
             <Playlist
               playlistName={this.state.playlistName}
               playlistTracks={this.state.playlistTracks}
               onRemove={this.removeTrack}
               onNameChange={this.updatePlaylistName}
               onSave={this.savePlaylist}
+
             />
           </div>
         </div>
