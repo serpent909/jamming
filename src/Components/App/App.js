@@ -6,9 +6,11 @@ import Playlist from '../Playlist/Playlist.js';
 import Spotify from '../../util/Spotify.js';
 
 
+
+
 class App extends React.Component {
   constructor(props) {
-    super();
+    super(props);
 
     this.state = {
       searchResults: [],
@@ -20,11 +22,11 @@ class App extends React.Component {
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
+    // this.accessToken = Spotify.getAccessToken();
   }
 
-
-
   addTrack(track) {
+
     let tracks = this.state.playlistTracks;
     if (tracks.find(savedTrack => savedTrack.id === track.id)) {
       return;
@@ -33,6 +35,7 @@ class App extends React.Component {
     tracks.push(track);
     this.setState({ playlistTracks: tracks });
   }
+
 
   removeTrack(track) {
     let tracks = this.state.playlistTracks;
