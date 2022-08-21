@@ -6,8 +6,6 @@ import Playlist from '../Playlist/Playlist.js';
 import Spotify from '../../util/Spotify.js';
 
 
-
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -23,6 +21,11 @@ class App extends React.Component {
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
     // this.accessToken = Spotify.getAccessToken();
+    this.searchState = window.location.href.match(/state=([^&]*)/);
+    if (this.searchState && this.searchState.length && this.searchState.length > 1) {
+      this.search(this.searchState[1]);
+
+    }
   }
 
   addTrack(track) {
@@ -57,9 +60,17 @@ class App extends React.Component {
   }
 
   search(term) {
+
+
     Spotify.search(term).then(searchResults => {
       this.setState({ searchResults: searchResults });
     })
+    if (this.searchState) {
+      window.history.pushState('Access Token', null, `/?state=${term}`)
+
+    }
+
+
   }
 
   render() {
