@@ -36,7 +36,6 @@ class App extends React.Component {
     this.setState({ playlistTracks: tracks });
   }
 
-
   removeTrack(track) {
     let tracks = this.state.playlistTracks;
     tracks = tracks.filter(currentTrack => currentTrack.id !== track.id);
@@ -50,10 +49,10 @@ class App extends React.Component {
   savePlaylist() {
     const trackUris = this.state.playlistTracks.map(track => track.uri);
     Spotify.savePlaylist(this.state.playlistName, trackUris).then(() => {
-      this.setState({ 
-        playlistName: 'New Playlist', 
+      this.setState({
+        playlistName: 'New Playlist',
         playlistTracks: []
-       })
+      })
     })
   }
 
@@ -64,9 +63,9 @@ class App extends React.Component {
   }
 
   render() {
-    
+
     return (
-      
+
       <div>
         <h1>Ja<span className="highlight">mmm</span>ing</h1>
         <div className="App">
