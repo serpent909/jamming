@@ -86,6 +86,9 @@ class App extends React.Component {
       button.innerHTML = '▶️';
     })
 
+    let imageArray = document.querySelectorAll('.album-image');
+    imageArray.forEach(image => { image.classList.remove('rotate') })
+
     let targetElementName = playButton.target.name
 
     if (targetElementName === this.state.playing) {
@@ -93,6 +96,7 @@ class App extends React.Component {
       htmlElement.pause();
       htmlElement.currentTime = 0;
       this.setState({ playing: [] })
+      this.stopRotate(htmlElement);
 
     } else {
       let button = playButton.target
@@ -100,7 +104,20 @@ class App extends React.Component {
       let htmlElement = document.getElementById(targetElementName);
       htmlElement.play()
       this.setState({ playing: targetElementName });
+      this.rotate(htmlElement)
     }
+  }
+
+  rotate(audioId) {
+    let audioString = audioId.id.toString();
+    let trackImage = document.querySelector(`img[alt="${audioString}"]`);
+    trackImage.classList.add('rotate');
+  }
+
+  stopRotate(audioId) {
+    let audioString = audioId.id.toString();
+    let trackImage = document.querySelector(`img[alt="${audioString}"]`);
+    trackImage.classList.remove('rotate');
   }
 
 

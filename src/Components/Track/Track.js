@@ -16,8 +16,8 @@ class Track extends React.Component {
         } else {
             return (
                 <div>
-                    {this.props.track.previewUrl? <button className="Track-play" onClick={this.props.onPlay} name={this.props.track.previewUrl}>▶️</button>:<button className="Track-play" onClick={this.props.onPlay} name={this.props.track.previewUrl} disabled>▶️</button>}
-                    <audio id={this.props.track.previewUrl}>
+                    {this.props.track.previewUrl? <button className="Track-play" onClick={this.props.onPlay} name={this.props.track.previewUrl}>▶️</button>:null}
+                    <audio id={this.props.track.previewUrl} name={this.props.track.id}>
                         <source src={this.props.track.previewUrl} type="audio/mpeg" />
                     </audio>
                     <button className="Track-action" onClick={this.addTrack} id={this.props.track.previewUrl}>+</button>
@@ -37,15 +37,14 @@ class Track extends React.Component {
 
     render() {
         return (
-            <div className="Track">
-                <img src={this.props.track.albumImage} alt={this.props.track.name} />
+            <div className="Track" id={this.props.track.id}>
+                <img className="album-image" src={this.props.track.albumImage} alt={this.props.track.previewUrl} />
                 <div className="Track-information">
                     <h3>{this.props.track.name}</h3>
                     <p>{this.props.track.artist} | {this.props.track.album}</p>
                     <p></p>
                 </div>
                 {this.renderAction()}
-                <div></div>
             </div>
         )
     }
