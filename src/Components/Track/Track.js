@@ -7,9 +7,6 @@ class Track extends React.Component {
 
         this.addTrack = this.addTrack.bind(this);
         this.removeTrack = this.removeTrack.bind(this);
-
-
-
     }
 
     renderAction() {
@@ -19,11 +16,11 @@ class Track extends React.Component {
         } else {
             return (
                 <div>
-                    <button className="Track-play" onClick={this.props.onPlay} name={this.props.track.previewUrl}>▶</button>
+                    {this.props.track.previewUrl? <button className="Track-play" onClick={this.props.onPlay} name={this.props.track.previewUrl}>▶️</button>:<button className="Track-play" onClick={this.props.onPlay} name={this.props.track.previewUrl} disabled>▶️</button>}
                     <audio id={this.props.track.previewUrl}>
                         <source src={this.props.track.previewUrl} type="audio/mpeg" />
                     </audio>
-                    <button className="Track-action" onClick={this.addTrack}>+</button>
+                    <button className="Track-action" onClick={this.addTrack} id={this.props.track.previewUrl}>+</button>
                 </div>
             )
         }
@@ -48,6 +45,7 @@ class Track extends React.Component {
                     <p></p>
                 </div>
                 {this.renderAction()}
+                <div></div>
             </div>
         )
     }

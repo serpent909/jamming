@@ -14,7 +14,8 @@ class App extends React.Component {
     this.state = {
       searchResults: [],
       playlistName: 'My playlist',
-      playlistTracks: []
+      playlistTracks: [],
+      playing: ''
     }
 
     this.addTrack = this.addTrack.bind(this);
@@ -73,19 +74,33 @@ class App extends React.Component {
     }
   }
 
-  play(ok) {
+  play(playButton) {
+
     let audioArray = document.querySelectorAll('audio');
     audioArray.forEach(audio => {
       audio.pause();
-      
     })
-    console.log(ok)
 
-    console.log(audioArray)
+    let buttonArray = document.querySelectorAll('.Track-play');
+    buttonArray.forEach(button => {
+      button.innerHTML = '▶️';
+    })
 
-    let targetElement = ok.target.name
-    let x = document.getElementById(targetElement);
-    x.play()
+    let targetElementName = playButton.target.name
+
+    if (targetElementName === this.state.playing) {
+      let htmlElement = document.getElementById(targetElementName);
+      htmlElement.pause();
+      htmlElement.currentTime = 0;
+      this.setState({ playing: [] })
+
+    } else {
+      let button = playButton.target
+      button.innerHTML = '⏹️'
+      let htmlElement = document.getElementById(targetElementName);
+      htmlElement.play()
+      this.setState({ playing: targetElementName });
+    }
   }
 
 
@@ -98,7 +113,7 @@ class App extends React.Component {
         <div className="App">
           <SearchBar onSearch={this.search} />
           <div className="App-playlist">
-            <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack}  onPlay={this.play} />
+            <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} onPlay={this.play} />
             <Playlist
               playlistName={this.state.playlistName}
               playlistTracks={this.state.playlistTracks}
