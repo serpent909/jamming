@@ -17,7 +17,15 @@ class Track extends React.Component {
             return <button className="Track-action" onClick={this.removeTrack}>-</button>
 
         } else {
-            return <button className="Track-action" onClick={this.addTrack}>+</button>
+            return (
+                <div>
+                    <button className="Track-play" onClick={this.props.onPlay} name={this.props.track.previewUrl}>▶</button>
+                    <audio id={this.props.track.previewUrl}>
+                        <source src={this.props.track.previewUrl} type="audio/mpeg" />
+                    </audio>
+                    <button className="Track-action" onClick={this.addTrack}>+</button>
+                </div>
+            )
         }
     }
 
@@ -38,11 +46,6 @@ class Track extends React.Component {
                     <h3>{this.props.track.name}</h3>
                     <p>{this.props.track.artist} | {this.props.track.album}</p>
                     <p></p>
-                    <button onClick={this.props.onPlay} name={this.props.track.previewUrl}>Preview</button>
-                    <audio id={this.props.track.previewUrl}>
-                        <source src={this.props.track.previewUrl} type="audio/mpeg" />
-                        Your browser does not support the audio element.
-                    </audio>
                 </div>
                 {this.renderAction()}
             </div>

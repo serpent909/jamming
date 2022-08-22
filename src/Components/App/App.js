@@ -16,6 +16,7 @@ class App extends React.Component {
       playlistName: 'My playlist',
       playlistTracks: []
     }
+
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
@@ -73,12 +74,20 @@ class App extends React.Component {
   }
 
   play(ok) {
+    let audioArray = document.querySelectorAll('audio');
+    audioArray.forEach(audio => {
+      audio.pause();
+      
+    })
+    console.log(ok)
+
+    console.log(audioArray)
+
     let targetElement = ok.target.name
     let x = document.getElementById(targetElement);
-    console.log(x)
     x.play()
-
   }
+
 
   render() {
 
