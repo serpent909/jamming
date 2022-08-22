@@ -28,7 +28,7 @@
 .Track-action {
   cursor: pointer;
   padding: .5rem;
-  font-size: 1.05rem;
+  font-size: 1.6rem;
   transition: color .25s;
   border: 0px;
   background-color: rgba(0, 0, 0, 0);
@@ -37,6 +37,14 @@
 
 .Track-action:hover {
   color: rgba(265, 265, 265, .5);
+}
+
+.Track-buttons{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+
 }
 
 .Track-play {
@@ -60,6 +68,11 @@
   flex-direction: column;
   justify-content: center;
   height: 100px;
+  margin-right: 10px;
+  white-space: nowrap; 
+  width: 50px; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
 }
 
 .Track-information h3 {

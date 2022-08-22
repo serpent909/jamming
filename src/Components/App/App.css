@@ -2,10 +2,11 @@ body,
 html,
 #root {
   height: 100%;
+
 }
 
 html {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 h1 {
@@ -28,7 +29,7 @@ h2 {
 
 .App {
   height: 100%;
-  padding: 0 17% 10% 17%;
+  padding: 0 10% 10% 10%;
   background-image: url('./background_photo_desktop.jpg');
   background-size: cover;
   background-position: center;
@@ -42,11 +43,17 @@ h2 {
   display: flex;
   justify-content: space-between;
   width: 100%;
+
 }
 
 @media only screen and (max-width: 1020px) {
+  .App {
+    padding: 0 5% 5% 5%;
+
+  }
   .App-playlist {
     align-items: center;
     flex-direction: column;
+
   }
 }
