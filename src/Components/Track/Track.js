@@ -9,6 +9,7 @@ class Track extends React.Component {
         this.removeTrack = this.removeTrack.bind(this);
     }
 
+
     renderAction() {
         if (this.props.isRemoval === true) {
             return <button className="Track-action" onClick={this.removeTrack}>-</button>
@@ -16,7 +17,7 @@ class Track extends React.Component {
         } else {
             return (
                 <div>
-                    {this.props.track.previewUrl? <button className="Track-play" onClick={this.props.onPlay} name={this.props.track.previewUrl}>▶️</button>:null}
+                    {this.props.track.previewUrl? <button className="Track-play" onClick={this.props.onPlay} name={this.props.track.previewUrl}>▶️</button>:<button className="Track-play" title="No preview available" disabled>▶️</button>}
                     <audio id={this.props.track.previewUrl} name={this.props.track.id}>
                         <source src={this.props.track.previewUrl} type="audio/mpeg" />
                     </audio>

@@ -32,6 +32,8 @@ class App extends React.Component {
     }
   }
 
+  
+
   addTrack(track) {
 
     let tracks = this.state.playlistTracks;
@@ -76,6 +78,8 @@ class App extends React.Component {
 
   play(playButton) {
 
+
+
     let audioArray = document.querySelectorAll('audio');
     audioArray.forEach(audio => {
       audio.pause();
@@ -103,6 +107,7 @@ class App extends React.Component {
       button.innerHTML = '⏹️'
       let htmlElement = document.getElementById(targetElementName);
       htmlElement.play()
+
       this.setState({ playing: targetElementName });
       this.rotate(htmlElement)
     }
@@ -112,6 +117,9 @@ class App extends React.Component {
     let audioString = audioId.id.toString();
     let trackImage = document.querySelector(`img[alt="${audioString}"]`);
     trackImage.classList.add('rotate');
+    audioId.addEventListener('ended', () => {
+      trackImage.classList.remove('rotate');
+    })
   }
 
   stopRotate(audioId) {

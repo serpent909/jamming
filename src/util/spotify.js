@@ -1,5 +1,5 @@
 const clientId = "e7f9a7640b36435c907119c81fe6c07c";
-const redirectUri = 'http://localhost:3000/';
+const redirectUri = 'https://jamming-with-matt.surge.sh/';
 let accessToken;
 
 
