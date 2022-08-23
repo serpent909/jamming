@@ -18,21 +18,25 @@ class App extends React.Component {
       playing: ''
     }
 
+    this.search = this.search.bind(this);
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
     this.play = this.play.bind(this);
-    // this.accessToken = Spotify.getAccessToken();
     this.searchState = window.location.href.match(/state=([^&]*)/);
+
+  }
+
+  componentDidMount() {
+
     if (this.searchState && this.searchState.length && this.searchState.length > 1) {
       this.search(this.searchState[1]);
-
+      this.accessToken = Spotify.getAccessToken();
     }
   }
 
-  
 
   addTrack(track) {
 
@@ -65,7 +69,9 @@ class App extends React.Component {
     })
   }
 
+
   search(term) {
+
 
     Spotify.search(term).then(searchResults => {
       this.setState({ searchResults: searchResults });
