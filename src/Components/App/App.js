@@ -3,7 +3,7 @@ import React from 'react';
 import SearchBar from '../SearchBar/SearchBar.js';
 import SearchResults from '../SearchResults/SearchResults.js';
 import Playlist from '../Playlist/Playlist.js';
-import Spotify from '../../util/Spotify.js';
+import spotify from '../../util/Spotify.js';
 
 
 class App extends React.Component {
@@ -33,7 +33,7 @@ class App extends React.Component {
 
     if (this.searchState && this.searchState.length && this.searchState.length > 1) {
       this.search(this.searchState[1]);
-      this.accessToken = Spotify.getAccessToken();
+
     }
   }
 

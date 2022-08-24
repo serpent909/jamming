@@ -4,7 +4,9 @@ let accessToken;
 
 
 const Spotify = {
+
     getAccessToken(term) {
+
         if (accessToken) {
             return accessToken;
         }
