@@ -3,7 +3,7 @@ import React from 'react';
 import SearchBar from '../SearchBar/SearchBar.js';
 import SearchResults from '../SearchResults/SearchResults.js';
 import Playlist from '../Playlist/Playlist.js';
-import spotify from '../../util/Spotify.js';
+import spotify from '../../util/spotify.js';
 
 
 class App extends React.Component {
@@ -61,7 +61,7 @@ class App extends React.Component {
 
   savePlaylist() {
     const trackUris = this.state.playlistTracks.map(track => track.uri);
-    Spotify.savePlaylist(this.state.playlistName, trackUris).then(() => {
+    spotify.savePlaylist(this.state.playlistName, trackUris).then(() => {
       this.setState({
         playlistName: 'New Playlist',
         playlistTracks: []
@@ -73,7 +73,7 @@ class App extends React.Component {
   search(term) {
 
 
-    Spotify.search(term).then(searchResults => {
+    spotify.search(term).then(searchResults => {
       this.setState({ searchResults: searchResults });
     })
     if (this.searchState) {
